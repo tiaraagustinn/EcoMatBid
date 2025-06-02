@@ -184,6 +184,7 @@ export default function LandingPage() {
   <Image
     src="/images/4.gif"
     alt="Platform Features Animation"
+    unoptimized
     fill
     className="object-cover filter hue-rotate-[45deg] saturate-40 brightness-125"
   />

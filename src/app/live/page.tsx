@@ -16,6 +16,7 @@ export default function LiveAuctionPage() {
   const router = useRouter();
   const [currentBid, setCurrentBid] = useState(500000);
   const [bidIncrement, setBidIncrement] = useState(50000);
+  const [showWinnerModal, setShowWinnerModal] = useState(false);
   const [bids, setBids] = useState<Bid[]>([
     {
       id: 1,
@@ -64,7 +65,8 @@ export default function LiveAuctionPage() {
                   src="/images/batu-bata.jpg"
                   alt="Product"
                   fill
-                  className="object-cover"
+                  className="object-cover cursor-pointer"
+                  onClick={() => setShowWinnerModal(true)}
                 />
                 <div className="absolute top-4 left-4 flex gap-2">
                   <span className="px-3 py-1 rounded-full text-white text-sm bg-red-500">
@@ -181,6 +183,42 @@ export default function LiveAuctionPage() {
           </div>
         </div>
       </div>
+
+      {/* Winner Modal */}
+      {showWinnerModal && (
+        <div className="fixed inset-0 backdrop-blur-sm bg-black/30 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl p-8 max-w-sm w-full mx-4 shadow-xl transform transition-all">
+            <div className="text-center">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Lelang telah berakhir</h3>
+              <div className="mb-6">
+                <Image
+                  src="/images/win1.gif"
+                  alt="Winner"
+                  width={150}
+                  height={150}
+                  className="mx-auto"
+                />
+              </div>
+              <p className="text-gray-600 mb-2">Selamat, anda memenangkan lelang</p>
+              <p className="text-gray-600 mb-6">Anda menawar paling tinggi</p>
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={() => router.push('/home')}
+                  className="w-full bg-gray-500 text-white py-3 px-4 rounded-full hover:bg-gray-600 transition-all font-medium"
+                >
+                  Kembali ke Beranda
+                </button>
+                <button
+                  onClick={() => router.push('/payment')}
+                  className="w-full bg-green-600 text-white py-3 px-4 rounded-full hover:bg-green-700 transition-all font-medium"
+                >
+                  Bayar Sekarang
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 } 
