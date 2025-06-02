@@ -1,7 +1,5 @@
 # EcomatBid - Platform Lelang Material Bangunan
 
-![EcomatBid Logo](public/logo.png)
-
 EcomatBid adalah platform lelang online yang melakukan penjualan material bangunan. Aplikasi ini dirancang untuk memudahkan proses lelang material bangunan secara real-time dengan antarmuka yang modern dan mudah digunakan.
 
 ## Fitur Utama
