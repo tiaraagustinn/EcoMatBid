@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# EcomatBid - Platform Lelang Material Bangunan
 
-## Getting Started
+![EcomatBid Logo](public/logo.png)
 
-First, run the development server:
+EcomatBid adalah platform lelang online yang melakukan penjualan material bangunan. Aplikasi ini dirancang untuk memudahkan proses lelang material bangunan secara real-time dengan antarmuka yang modern dan mudah digunakan.
 
+## Fitur Utama
+
+### Manajemen Lelang
+- **Kategori Material**: Pemilihan berbagai kategori material (keramik, besi, batu bata, dll.)
+- **Jadwal Lelang**: Informasi jadwal lelang berdasarkan kategori material
+- **Detail Produk**: Informasi lengkap kondisi barang (foto, usia, kualitas)
+
+### Sistem Lelang
+- **Live Auction**: Sistem lelang real-time dengan pembaruan otomatis
+- **Penawaran Lelang**: Opsi kenaikan bid yang fleksibel (+50k, +100k, +500k)
+- **Riwayat Penawaran**: Pantau semua aktivitas penawaran secara langsung
+
+### Pendaftaran & Pembayaran
+- **Registrasi Peserta**: Sistem pendaftaran untuk calon peserta lelang
+- **Nomor Peserta Lelang (NPL)**: Pembelian dan pembayaran nomor identifikasi lelang
+- **Pembayaran Pemenang**: Sistem escrow untuk keamanan transaksi
+
+### Pengiriman & Logistik
+- **Opsi Pengambilan**: Pilihan pengambilan barang di lokasi
+- **Layanan Pengiriman**: Integrasi dengan jasa pengiriman untuk pengantaran barang
+- **Tracking System**: Pemantauan status pengiriman barang
+
+### Fitur Tambahan
+- **Rating & Review**: Sistem penilaian dan ulasan untuk pembeli dan penjual
+- **Notifikasi**: Pemberitahuan otomatis untuk setiap aktivitas penting
+- **Riwayat Transaksi**: Pencatatan semua transaksi lelang
+
+## Teknologi yang Digunakan
+
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- React Hooks
+- Next.js Image Optimization
+
+## Cara Menjalankan Proyek
+
+1. Clone repositori ini:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/tiaraagustinn/EcoMatBid.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependensi:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Jalankan server development:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Buka [http://localhost:3000](http://localhost:3000) di browser Anda.
 
-## Learn More
+## Struktur Proyek
 
-To learn more about Next.js, take a look at the following resources:
+```
+ecomatbid/
+├── public/
+│   ├── images/
+│   └── icons/
+├── src/
+│   ├── app/
+│   │   ├── live/
+│   │   ├── home/
+│   │   ├── objek-lelang/
+│   │   ├── beli-npl/
+│   │   ├── open-lelang/
+│   │   ├── invoice/
+│   │   └── ...
+│   ├── components/
+│   └── utils/
+└── ...
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Kontribusi
+- Email: tiaraagustin7072@gmail.com
+- GitHub: [@tiaraagustin](https://github.com/tiaraagustinn)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
