@@ -1,11 +1,27 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import Header from '@/components/Header'
 
 export default function Home() {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('')
+  const [userName, setUserName] = useState('')
+
+  useEffect(() => {
+    // Cek status login
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (!isLoggedIn) {
+      router.push('/login');
+    } else {
+      // Ambil nama user
+      const name = localStorage.getItem('userName');
+      setUserName(name || '');
+    }
+  }, [router]);
 
   const categories = [
     {
@@ -53,116 +69,103 @@ export default function Home() {
       location: 'SURABAYA',
       image: '/images/batu-bata.jpg',
       status: 'Timer'
+    },
+    {
+      id: 3,
+      title: 'Semen Portland 50kg',
+      price: 75000,
+      date: '18 April 2025',
+      location: 'JAKARTA',
+      image: '/images/semen.jpg',
+      status: 'Live'
+    },
+    {
+      id: 4,
+      title: 'Keramik Granite 60x60',
+      price: 225000,
+      image: '/images/keramik.jpg',
+      status: 'Timer',
+      date: '19 April 2025',
+      location: 'BANDUNG'
     }
   ]
 
   return (
-    <main className="min-h-screen p-4 md:p-8">
-      {/* Header */}
-      <header className="flex items-center justify-between mb-8">
-        <div className="flex items-center gap-4">
-          <div className="relative w-64">
-            <input
-              type="text"
-              placeholder="Cari Objek Lelang"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300"
-            />
-            <Image
-              src="/icons/search.svg"
-              alt="Search"
-              width={20}
-              height={20}
-              className="absolute right-3 top-1/2 transform -translate-y-1/2"
-            />
-          </div>
-        </div>
-        
-        <div className="flex items-center gap-4">
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/objek-lelang" className="hover:text-purple-600">Objek Lelang</Link>
-            <Link href="/open-lelang" className="hover:text-purple-600">Open Lelang</Link>
-            <Link href="/riwayat-lelang" className="hover:text-purple-600">Riwayat Lelang</Link>
-            <Link href="/beli-npl" className="hover:text-purple-600">Beli NPL</Link>
-          </nav>
-          
-          <div className="flex items-center gap-4">
-            <button className="p-2">
-              <Image src="/icons/location.svg" alt="Location" width={24} height={24} />
-            </button>
-            <button className="p-2">
-              <Image src="/icons/notification.svg" alt="Notifications" width={24} height={24} />
-            </button>
-            <div className="flex items-center gap-2">
-              <Image src="/icons/avatar.svg" alt="Profile" width={32} height={32} className="rounded-full" />
-              <span>Tiara Agustin</span>
-            </div>
-          </div>
-        </div>
-      </header>
+    <div className="bg-white">
+      <Header currentPath="/home" />
 
-      {/* Ads Banner */}
-      <div className="w-full h-64 bg-gray-200 rounded-xl mb-12 flex items-center justify-center">
-        <h2 className="text-2xl text-gray-500">Adds</h2>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Ads Banner */}
+        <div className="w-full h-64 rounded-xl mb-12 overflow-hidden">
+          <Image
+            src="/images/2.gif"
+            alt="Advertisement Banner"
+            width={1200}
+            height={256}
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        {/* Categories */}
+        <section className="mb-12">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl text-black font-semibold">Kategori</h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {categories.map((category) => (
+              <div key={category.id} className="flex flex-col items-center gap-2 p-4 rounded-xl bg-gradient-to-br from-purple-400 to-pink-300 hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm">
+                  <Image src={category.icon} alt={category.name} width={24} height={24} />
+                </div>
+                <span className="text-sm text-center text-white">{category.name}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Auction Items */}
+        <section>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl text-black font-semibold">Objek Lelang</h2>
+            <Link href="/objek-lelang" className="text-purple-600 hover:underline">
+              Lihat Semua
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {auctionItems.map((item) => (
+              <div key={item.id} className="bg-white rounded-xl text-black overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+                <div className="relative h-48">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className={`absolute top-4 left-4 px-3 py-1 rounded-full text-white text-sm
+                    ${item.status === 'Live' ? 'bg-red-500' : 
+                      item.status === 'Timer' ? 'bg-blue-500' : 
+                      item.status === 'Flash' ? 'bg-yellow-500' : 
+                      'bg-gray-500'}`}>
+                    {item.status}
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold mb-2">{item.title}</h3>
+                  <p className="text-purple-600 font-semibold mb-2">Rp {item.price.toLocaleString()}</p>
+                  <div className="flex items-center gap-2 text-sm text-gray-500">
+                    <Image src="/icons/calendar.svg" alt="Date" width={16} height={16} />
+                    <span>{item.date}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-gray-500 mt-1">
+                    <Image src="/icons/location-pin.svg" alt="Location" width={16} height={16} />
+                    <span>{item.location}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
-
-      {/* Categories */}
-      <section className="mb-12">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold">Kategori</h2>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-          {categories.map((category) => (
-            <div key={category.id} className="flex flex-col items-center gap-2 p-4 rounded-xl bg-gradient-to-br from-purple-400 to-pink-300">
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                <Image src={category.icon} alt={category.name} width={24} height={24} />
-              </div>
-              <span className="text-sm text-center text-white">{category.name}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Auction Items */}
-      <section>
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold">Objek Lelang</h2>
-          <Link href="/objek-lelang" className="text-purple-600 hover:underline">
-            Lihat Semua
-          </Link>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {auctionItems.map((item) => (
-            <div key={item.id} className="bg-white rounded-xl overflow-hidden shadow-md">
-              <div className="relative h-48">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  className="object-cover"
-                />
-                <div className={`absolute top-4 left-4 px-3 py-1 rounded-full text-white text-sm
-                  ${item.status === 'Live' ? 'bg-red-500' : 'bg-blue-500'}`}>
-                  {item.status}
-                </div>
-              </div>
-              <div className="p-4">
-                <h3 className="font-semibold mb-2">{item.title}</h3>
-                <p className="text-purple-600 font-semibold mb-2">Rp {item.price.toLocaleString()}</p>
-                <div className="flex items-center gap-2 text-sm text-gray-500">
-                  <Image src="/icons/calendar.svg" alt="Date" width={16} height={16} />
-                  <span>{item.date}</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-gray-500 mt-1">
-                  <Image src="/icons/location-pin.svg" alt="Location" width={16} height={16} />
-                  <span>{item.location}</span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-    </main>
+    </div>
   )
 }
