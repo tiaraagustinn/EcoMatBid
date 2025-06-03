@@ -41,7 +41,7 @@ export default function BeliNPLPage({ params }: { params: { id: string } }) {
               </div>
               <div>
                 <h2 className="font-semibold text-gray-900">Batu Tanah Liat Merah</h2>
-                <p className="text-sm text-gray-500 mb-1">ID Lelang: #{params.id}</p>
+                <p className="text-sm text-gray-500 mb-1">ID Lelang: #1</p>
                 <p className="text-lg font-semibold text-green-600">NPL Price: Rp 50.000</p>
               </div>
             </div>
