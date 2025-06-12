@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Header from '@/components/Header';
 import { useRouter } from 'next/navigation';
 
-export default function DetailLelangPage({ params }: { params: { id: string } }) {
+export default function DetailLelangPage() {
   const router = useRouter();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showMessage, setShowMessage] = useState(false);
@@ -168,7 +168,7 @@ export default function DetailLelangPage({ params }: { params: { id: string } })
                 Join Auction
               </button>
               <button 
-                onClick={() => router.push(`/beli-npl/${params.id}`)}
+                onClick={() => router.push(`/beli-npl/`)}
                 className="flex-1 bg-green-600 text-white py-3 px-6 rounded-full hover:bg-green-700 transition-colors"
               >
                 Buy NPL

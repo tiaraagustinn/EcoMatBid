@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Header from '@/components/Header';
 import { useRouter } from 'next/navigation';
@@ -20,9 +20,9 @@ interface InvoiceData {
   pickupSchedule: string;
 }
 
-export default function InvoicePage({ params }: { params: { id: string } }) {
+export default function BeliNPLPage() {
   const router = useRouter();
-  const [invoice, setInvoice] = useState<InvoiceData>({
+  const [invoice] = useState<InvoiceData>({
     title: 'Semen Padang - 10 Sak',
     category: 'Bahan Bangunan : Semen',
     auctionCode: '#TDR1346',

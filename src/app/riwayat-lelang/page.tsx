@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 
@@ -91,7 +90,7 @@ export default function RiwayatLelangPage() {
     }
   });
 
-  const handleViewInvoice = (id: number) => {
+  const handleViewInvoice = () => {
     router.push(`invoice/`);
   };
 
@@ -144,7 +143,7 @@ export default function RiwayatLelangPage() {
                 <div className="flex flex-col gap-2">
                   {(activity.status === 'Menang - Sudah Dibayar' || activity.status === 'Transaksi - Selesai') && (
                     <button
-                      onClick={() => handleViewInvoice(activity.id)}
+                      onClick={() => handleViewInvoice()}
                       className="bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition-colors"
                     >
                       Unduh Invoice

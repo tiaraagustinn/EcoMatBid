@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { LocationDialog } from './ui/location-dialog';
 
 interface HeaderProps {
   currentPath?: string;
@@ -14,7 +13,6 @@ export default function Header({ currentPath }: HeaderProps) {
   const router = useRouter();
   const [userName, setUserName] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
-  const [isLocationDialogOpen, setIsLocationDialogOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -33,10 +31,6 @@ export default function Header({ currentPath }: HeaderProps) {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
-  const handleProfileClick = () => {
-    router.push('/profile');
-  };
 
   const handleLogoutClick = () => {
     setShowLogoutConfirm(true);
@@ -112,7 +106,6 @@ export default function Header({ currentPath }: HeaderProps) {
             <div className="flex items-center gap-4">
               <button 
                 className="p-1 hover:bg-gray-50 rounded-lg transition-colors"
-                onClick={() => setIsLocationDialogOpen(true)}
               >
                 <Image src="/icons/location.svg" alt="Location" width={24} height={24} />
               </button>
@@ -169,10 +162,6 @@ export default function Header({ currentPath }: HeaderProps) {
         </div>
       </header>
 
-      <LocationDialog 
-        isOpen={isLocationDialogOpen}
-        onClose={() => setIsLocationDialogOpen(false)}
-      />
 
       {/* Logout Confirmation Dialog */}
       {showLogoutConfirm && (

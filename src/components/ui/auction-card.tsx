@@ -14,7 +14,6 @@ interface AuctionCardProps {
 }
 
 export function AuctionCard({
-  id,
   title,
   price,
   date,

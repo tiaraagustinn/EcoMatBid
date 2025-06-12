@@ -1,28 +1,10 @@
 'use client'
 
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import Header from '@/components/Header'
 
 export default function Home() {
-  const router = useRouter();
-  const [searchQuery, setSearchQuery] = useState('')
-  const [userName, setUserName] = useState('')
-
-  useEffect(() => {
-    // Cek status login
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
-    if (!isLoggedIn) {
-      router.push('/login');
-    } else {
-      // Ambil nama user
-      const name = localStorage.getItem('userName');
-      setUserName(name || '');
-    }
-  }, [router]);
-
   const categories = [
     {
       id: 1,

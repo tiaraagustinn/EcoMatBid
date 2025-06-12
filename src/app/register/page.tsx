@@ -6,6 +6,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { BackgroundGradient } from '@/components/ui/background-gradient';
 
+interface User {
+  fullName: string;
+  email: string;
+  password: string;
+}
+
 export default function RegisterPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -45,8 +51,8 @@ export default function RegisterPage() {
     }
 
     // Cek apakah email sudah terdaftar
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    if (users.some((user: any) => user.email === formData.email)) {
+    const users: User[] = JSON.parse(localStorage.getItem('users') || '[]');
+    if (users.some(user => user.email === formData.email)) {
       setError('Email sudah terdaftar');
       return;
     }

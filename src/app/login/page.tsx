@@ -6,6 +6,12 @@ import Link from 'next/link';
 import { BackgroundGradient } from '@/components/ui/background-gradient';
 import { useRouter } from 'next/navigation';
 
+interface User {
+  email: string;
+  password: string;
+  fullName: string;
+}
+
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState('');
@@ -17,24 +23,19 @@ export default function LoginPage() {
     e.preventDefault();
     setError('');
 
-    // Ambil data users dari localStorage
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    
-    // Cari user dengan email yang sesuai
-    const user = users.find((u: any) => u.email === email);
+    const users: User[] = JSON.parse(localStorage.getItem('users') || '[]');
+    const user = users.find(u => u.email === email);
 
     if (user && user.password === password) {
-      // Simpan status login di localStorage
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('userEmail', email);
       localStorage.setItem('userName', user.fullName);
-      
-      // Redirect ke halaman home
       router.push('/home');
     } else {
       setError('Email atau password salah');
     }
   };
+
 
   return (
     <div className="min-h-screen bg-zinc-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
