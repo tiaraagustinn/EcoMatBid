@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "EcomatBid - Lelang Material Bangunan",
+  title: "EcoMatBid - Lelang Material Bangunan",
   description: "Platform lelang material bangunan terpercaya",
   icons: {
     icon: "/favicon.svg",
